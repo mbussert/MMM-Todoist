@@ -31,7 +31,7 @@ module.exports = NodeHelper.create({
 		//request.debug = true;
 		var acessCode = self.config.accessToken;
 		request({
-			url: self.config.apiBase + "/" + self.config.apiVersion + "/" + self.config.todoistEndpoint + "/",
+			url: self.config.apiBase + "/" + self.config.apiVersion + "/" + self.config.todoistEndpoint,
 			method: "POST",
 			headers: {
 				"content-type": "application/x-www-form-urlencoded",
