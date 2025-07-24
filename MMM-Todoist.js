@@ -558,11 +558,36 @@ Module.register("MMM-Todoist", {
   addCompleteTodoCell: function (item) {
     var completeTodoBox = document.createElement("div");
     completeTodoBox.className = "completeTodoBox";
+    completeTodoBox.onclick = () => {
+      // Toggle checkmark in UI
+      if (!completeTodoBox.classList.contains("checked")) {
+        completeTodoBox.innerHTML = "✓";
+        completeTodoBox.classList.add("checked");
+      } else {
+        completeTodoBox.innerHTML = "";
+        completeTodoBox.classList.remove("checked");
+      }
+      // Placeholder for future logic (e.g., mark as complete in Todoist)
+      this.onCompleteTodoClicked(
+        item,
+        completeTodoBox.classList.contains("checked")
+      );
+    };
 
     var cell = this.createCell("", "");
     cell.appendChild(completeTodoBox);
 
     return cell;
+  },
+
+  // Placeholder for future logic when a todo is marked complete
+  onCompleteTodoClicked: function (item, isChecked) {
+    // TODO: Implement logic to mark todo as complete in Todoist
+    // item: the todo item object
+    // isChecked: true if checked, false if unchecked
+    if (this.config.debug) {
+      console.log("Complete clicked for item:", item, "Checked:", isChecked);
+    }
   },
   addDueDateCell: function (item) {
     var className = "bright align-right dueDate ";
