@@ -555,6 +555,15 @@ Module.register("MMM-Todoist", {
 
     // return this.createCell("title bright alignLeft", item.content);
   },
+  addCompleteTodoCell: function (item) {
+    var completeTodoBox = document.createElement("div");
+    completeTodoBox.className = "completeTodoBox";
+
+    var cell = this.createCell("", "");
+    cell.appendChild(completeTodoBox);
+
+    return cell;
+  },
   addDueDateCell: function (item) {
     var className = "bright align-right dueDate ";
     var innerHTML = "";
@@ -725,6 +734,7 @@ Module.register("MMM-Todoist", {
       if (this.config.displayAvatar) {
         divRow.appendChild(this.addAssigneeAvatorCell(item, collaboratorsMap));
       }
+      divRow.appendChild(this.addCompleteTodoCell(item));
 
       divBody.appendChild(divRow);
     });
