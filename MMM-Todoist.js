@@ -561,7 +561,7 @@ Module.register("MMM-Todoist", {
     completeTodoBox.onclick = () => {
       // Toggle checkmark in UI
       if (!completeTodoBox.classList.contains("checked")) {
-        completeTodoBox.innerHTML = "✓";
+        completeTodoBox.innerHTML = "X";
         completeTodoBox.classList.add("checked");
       } else {
         completeTodoBox.innerHTML = "";
@@ -582,9 +582,13 @@ Module.register("MMM-Todoist", {
 
   // Placeholder for future logic when a todo is marked complete
   onCompleteTodoClicked: function (item, isChecked) {
-    // TODO: Implement logic to mark todo as complete in Todoist
-    // item: the todo item object
-    // isChecked: true if checked, false if unchecked
+    if (isChecked) {
+      // Send completion request to node helper
+      this.sendSocketNotification("COMPLETE_TODO", {
+        itemId: item.id,
+        accessToken: this.config.accessToken,
+      });
+    }
     if (this.config.debug) {
       console.log("Complete clicked for item:", item, "Checked:", isChecked);
     }
